@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0E14">
+<meta name="color-scheme" content="dark">
+<title>Rohit Kumar — Full-Stack Developer &amp; Competitive Programmer</title>
+<meta name="description" content="Rohit Kumar — B.Tech ECE student at IIIT Jabalpur. Full-stack developer (React, Node.js, TypeScript, PostgreSQL) and competitive programmer with 1,200+ DSA problems solved.">
+<meta property="og:title" content="Rohit Kumar — Full-Stack Developer &amp; Competitive Programmer">
+<meta property="og:description" content="Full-stack projects in production · 1,200+ DSA problems solved across LeetCode, Codeforces &amp; CodeChef.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230A0E14'/%3E%3Ctext x='50' y='68' font-size='52' fill='%2334D399' font-family='monospace' font-weight='bold' text-anchor='middle'%3E&gt;_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-void: #0A0E14;
+    --bg-panel: #11161D;
+    --accent-ac: #34D399;
+    --accent-pending: #F2B84B;
+    --text-primary: #E8EDF2;
+    --text-secondary: rgba(232,237,242,0.74);
+    --text-comment: #7B8794;
+    --border-line: rgba(255,255,255,0.08);
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, p, ul { margin: 0; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ac); outline-offset: 3px; }
+  img, svg { display: block; max-width: 100%; }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* Topbar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,14,20,0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-line);
+  }
+  .topbar-inner {
+    max-width: 880px; margin: 0 auto; padding: 0 20px;
+    display: flex; align-items: center; gap: 22px; height: 52px;
+    overflow-x: auto;
+  }
+  .chrome-dots { display: flex; gap: 6px; flex-shrink: 0; }
+  .chrome-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--border-line); }
+  .nav-tabs { display: flex; gap: 2px; font-family: var(--mono); font-size: 0.76rem; }
+  .nav-tabs a {
+    text-decoration: none; color: var(--text-comment);
+    padding: 6px 10px; border-radius: var(--radius);
+    white-space: nowrap; transition: color .15s, background .15s;
+  }
+  .nav-tabs a:hover { color: var(--accent-ac); background: var(--bg-panel); }
+
+  /* Hero */
+  .hero { padding: 56px 0 44px; }
+  .terminal {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    padding: 28px clamp(18px, 4vw, 38px) 32px;
+  }
+  .term-caption { font-family: var(--mono); font-size: 0.82rem; color: var(--text-comment); margin: 0 0 6px; }
+  .term-caption .term-prompt { color: var(--accent-ac); }
+  .cursor {
+    display: inline-block; width: 7px; height: 1em; background: var(--accent-ac);
+    vertical-align: text-bottom; margin-left: 4px; animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; opacity: 0.6; } }
+
+  .hero-name { font-family: var(--mono); font-size: clamp(1.7rem, 5vw, 2.5rem); font-weight: 700; margin: 0 0 22px; }
+  .hero-role { font-family: var(--sans); font-weight: 500; color: var(--text-primary); font-size: 1.02rem; margin-bottom: 22px; }
+  .hero-summary { color: var(--text-secondary); font-size: 0.98rem; max-width: 56ch; margin-bottom: 26px; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn {
+    font-family: var(--mono); font-size: 0.84rem; padding: 11px 18px; border-radius: var(--radius);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .15s, border-color .15s, color .15s; border: 1px solid transparent;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent-ac); color: var(--bg-void); font-weight: 700; }
+  .btn-secondary { border-color: var(--border-line); color: var(--text-primary); }
+  .btn-secondary:hover { border-color: var(--accent-ac); color: var(--accent-ac); }
+
+  .visit-line { font-family: var(--mono); font-size: 0.76rem; color: var(--text-comment); line-height: 1.8; }
+  .visit-line .val { color: var(--accent-pending); letter-spacing: 2px; }
+
+  /* Sections */
+  .section { padding: 52px 0; border-top: 1px solid var(--border-line); opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .section.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .section { opacity: 1; transform: none; transition: none; } }
+
+  .section-title { font-family: var(--mono); font-size: 1.15rem; font-weight: 600; margin: 0 0 26px; }
+  .section-title .slash { color: var(--text-comment); font-weight: 400; }
+
+  /* About */
+  .about-text { color: var(--text-secondary); max-width: 64ch; margin-bottom: 22px; }
+  .chip-callout {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--bg-panel);
+    border: 1px solid var(--border-line); border-radius: var(--radius); padding: 9px 14px;
+    font-family: var(--mono); font-size: 0.78rem; color: var(--accent-pending); margin-bottom: 30px;
+  }
+
+  .edu-card { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 10px; padding: 22px clamp(16px,3vw,26px); font-family: var(--mono); font-size: 0.85rem; }
+  .edu-row { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px dashed var(--border-line); }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-key { color: var(--text-comment); min-width: 110px; flex-shrink: 0; }
+  .edu-val { color: var(--text-primary); }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: rgba(52,211,153,0.08); color: var(--accent-ac); border: 1px solid rgba(52,211,153,0.25); border-radius: 4px; padding: 3px 9px; font-size: 0.74rem; }
+
+  /* Projects */
+  .proj-card { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 10px; padding: 24px clamp(18px,3vw,28px); margin-bottom: 18px; transition: border-color .2s; }
+  .proj-card:hover { border-color: rgba(52,211,153,0.35); }
+  .proj-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .proj-title { font-family: var(--mono); font-size: 1.04rem; font-weight: 600; }
+  .verdict {
+    font-family: var(--mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em;
+    color: var(--accent-ac); border: 1px solid rgba(52,211,153,0.35); background: rgba(52,211,153,0.08);
+    padding: 5px 10px; border-radius: 4px; white-space: nowrap;
+  }
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .proj-stack .tag { background: var(--bg-void); color: var(--text-secondary); border-color: var(--border-line); }
+  .proj-desc { color: var(--text-primary); font-weight: 500; margin-bottom: 14px; }
+  .proj-bullets { padding-left: 18px; color: var(--text-secondary); font-size: 0.95rem; }
+  .proj-bullets li { margin-bottom: 7px; }
+  .proj-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; font-family: var(--mono); font-size: 0.8rem; margin-top: 16px; }
+  .proj-links a { color: var(--accent-ac); text-decoration: none; }
+  .proj-links a:hover { text-decoration: underline; }
+  .unpublished-note { color: var(--text-comment); font-size: 0.76rem; }
+
+  /* Stats */
+  .stats-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.86rem; }
+  .stats-table th { text-align: left; color: var(--text-comment); font-weight: 500; padding: 10px 10px; border-bottom: 1px solid var(--border-line); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stats-table td { padding: 15px 10px; border-bottom: 1px solid var(--border-line); vertical-align: top; }
+  .stats-table tr:last-child td { border-bottom: none; }
+  .platform-name { color: var(--text-primary); font-weight: 600; }
+  .rating-val { color: var(--accent-pending); }
+  .stats-note { color: var(--text-comment); font-size: 0.8rem; }
+  .aggregate-callout {
+    margin-top: 22px; padding: 16px 20px; background: var(--bg-panel);
+    border-left: 2px solid var(--accent-ac); border-radius: 0 8px 8px 0;
+    font-family: var(--mono); font-size: 0.84rem; color: var(--text-secondary);
+  }
+  .aggregate-callout strong { color: var(--accent-ac); }
+
+  /* Skills */
+  .skill-group { margin-bottom: 22px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-group-label { font-family: var(--mono); font-size: 0.74rem; color: var(--text-comment); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { font-family: var(--mono); font-size: 0.79rem; padding: 6px 12px; border-radius: 4px; background: var(--bg-panel); border: 1px solid var(--border-line); color: var(--text-secondary); }
+
+  /* Contact */
+  .contact-list { display: flex; flex-direction: column; gap: 10px; max-width: 480px; }
+  .contact-row {
+    display: block; background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: var(--radius);
+    padding: 14px 18px; text-decoration: none; color: var(--text-primary); font-family: var(--mono);
+    font-size: 0.86rem; transition: border-color .15s, color .15s;
+  }
+  .contact-row:hover { border-color: var(--accent-ac); color: var(--accent-ac); }
+  .contact-row .term-prompt { color: var(--accent-ac); }
+  .contact-row:hover .term-prompt { color: inherit; }
+
+  .footer { padding: 30px 0 50px; text-align: center; color: var(--text-comment); font-family: var(--mono); font-size: 0.74rem; }
+
+  @media (max-width: 640px) {
+    .terminal { padding: 22px 18px 26px; }
+    .edu-row { flex-direction: column; gap: 2px; }
+    .proj-head { flex-direction: column; }
+    .stats-table { font-size: 0.78rem; }
+    .stats-table th, .stats-table td { padding: 11px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="chrome-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <nav class="nav-tabs" aria-label="Section navigation">
+      <a href="#about">about.md</a>
+      <a href="#projects">projects/</a>
+      <a href="#stats">stats.log</a>
+      <a href="#skills">skills.yaml</a>
+      <a href="#contact">contact.sh</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="terminal">
+        <p class="term-caption"><span class="term-prompt">$ </span><span class="caption-text">whoami</span></p>
+        <h1 class="hero-name">Rohit Kumar</h1>
+
+        <p class="term-caption"><span class="term-prompt">$ </span><span class="caption-text">cat role.txt</span></p>
+        <p class="hero-role">B.Tech ECE @ IIIT Jabalpur — Full-Stack Developer &amp; Competitive Programmer</p>
+
+        <p class="term-caption"><span class="term-prompt">$ </span><span class="caption-text">cat about.txt</span><span class="cursor" aria-hidden="true"></span></p>
+        <p class="hero-summary">Full-stack systems in production: JWT/RBAC auth, Razorpay webhook integration, and LLM-powered analysis tools.<br>1,200+ DSA problems solved across LeetCode, Codeforces &amp; CodeChef · LeetCode rating 1520.</p>
+
+        <div class="cta-row">
+          <a href="#projects" class="btn btn-primary">View Projects →</a>
+          <a href="Rohit_Kumar_Resume.pdf" class="btn btn-secondary" download>Download Résumé</a>
+        </div>
+
+        <p class="visit-line" id="visit-line">
+          <span class="term-prompt">$ </span>cat /var/log/visits.count<br>
+          <span class="val" id="visit-val">······</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title"><span class="slash">// </span>about.md</h2>
+
+      <p class="about-text">B.Tech ECE student at IIIT Jabalpur who ended up living in the full-stack world — React and Node on either end, PostgreSQL underneath, and an LLM API wired in wherever it earns its keep. Outside of shipped projects, most of the actual reps happen on judges: 1,200+ problems deep across LeetCode, Codeforces, and CodeChef.</p>
+
+      <p class="chip-callout">JEE Advanced qualifier — top 1.5% of 1.4M JEE Main candidates nationwide</p>
+
+      <div class="edu-card">
+        <div class="edu-row"><span class="edu-key">institution</span><span class="edu-val">PDPM IIIT Design &amp; Manufacturing, Jabalpur</span></div>
+        <div class="edu-row"><span class="edu-key">degree</span><span class="edu-val">B.Tech, Electronics &amp; Communication Engineering</span></div>
+        <div class="edu-row"><span class="edu-key">duration</span><span class="edu-val">2024 – 2028</span></div>
+        <div class="edu-row"><span class="edu-key">cgpa</span><span class="edu-val">7.7 / 10</span></div>
+        <div class="edu-row">
+          <span class="edu-key">coursework</span>
+          <span class="tag-list">
+            <span class="tag">Data Structures &amp; Algorithms</span>
+            <span class="tag">Object-Oriented Programming</span>
+            <span class="tag">Digital Systems</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title"><span class="slash">// </span>projects/</h2>
+
+      <article class="proj-card">
+        <div class="proj-head">
+          <h3 class="proj-title">Creator Dashboard</h3>
+          <span class="verdict">ACCEPTED</span>
+        </div>
+        <div class="proj-stack">
+          <span class="tag">React 18</span><span class="tag">Node.js</span><span class="tag">Express.js</span>
+          <span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">Razorpay</span><span class="tag">Tailwind CSS</span>
+        </div>
+        <p class="proj-desc">Full-stack creator monetization platform — content access gated by a real payment lifecycle, not a paywall toggle.</p>
+        <ul class="proj-bullets">
+          <li>Razorpay payment gateway with real-time webhook processing and HMAC-SHA256 signature verification for automated content access control.</li>
+          <li>JWT authentication with Role-Based Access Control (RBAC) across 5 RESTful API endpoints, including automatic token refresh on role elevation.</li>
+          <li>Payment lifecycle (pending → active → cancelled) enforced via PostgreSQL partial unique index constraints and JOIN-based authorization middleware — prevents duplicate subscriptions and privilege escalation.</li>
+          <li>Deployed split-stack: Vercel (frontend), Render (backend), Neon PostgreSQL.</li>
+        </ul>
+        <div class="proj-links">
+          <a href="https://creator-dashboard-wine.vercel.app/" target="_blank" rel="noopener noreferrer">→ Live Demo</a>
+          <a href="https://github.com/STONE-ROHIT/creator-dashboard" target="_blank" rel="noopener noreferrer">→ Source</a>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-head">
+          <h3 class="proj-title">LeetCode Analyzer</h3>
+          <span class="verdict">ACCEPTED</span>
+        </div>
+        <div class="proj-stack">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Express.js</span>
+          <span class="tag">PostgreSQL</span><span class="tag">Drizzle ORM</span><span class="tag">Groq LLM</span><span class="tag">Judge0</span>
+        </div>
+        <p class="proj-desc">A second opinion on your submission — correctness, complexity, and pattern recognition, without handing you the answer.</p>
+        <ul class="proj-bullets">
+          <li>Automated correctness verification, time/space complexity analysis, algorithmic pattern recognition, and a two-stage Socratic hint system — no user authentication required.</li>
+          <li>Custom multi-language harness generator parses LeetCode GraphQL API signatures into runnable Python, C++, and Java, executed in a self-hosted Judge0 sandbox.</li>
+          <li>Groq LLM API integration with a structured JSON contract; PostgreSQL query caching via Drizzle ORM, pre-seeded with ~3,000 problems.</li>
+          <li>Per-IP rate limiting to control inference costs. Built as a monorepo.</li>
+        </ul>
+        <div class="proj-links">
+          <a href="https://leetcode-analyzer-client.vercel.app/" target="_blank" rel="noopener noreferrer">→ Live Demo</a>
+          <a href="https://github.com/STONE-ROHIT/leetcode-analyzer" target="_blank" rel="noopener noreferrer">→ Source</a>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-head">
+          <h3 class="proj-title">CF Enhancer</h3>
+          <span class="verdict">ACCEPTED</span>
+        </div>
+        <div class="proj-stack">
+          <span class="tag">JavaScript</span><span class="tag">Vite</span><span class="tag">Chart.js</span>
+          <span class="tag">Chrome Extension MV3</span><span class="tag">Codeforces REST API</span>
+        </div>
+        <p class="proj-desc">The Codeforces profile page, rebuilt — because the default one doesn't tell you where you're actually weak.</p>
+        <ul class="proj-bullets">
+          <li>Replaces the default Codeforces profile with a CP analytics dashboard: contest rating history, problem difficulty distribution, topic-level weakness detection, and a GitHub-style yearly activity heatmap via Chart.js.</li>
+          <li>Codeforces Public REST API integration through a dedicated background service worker for MV3 compliance and separation of concerns.</li>
+          <li>SPA navigation detection via the MutationObserver Web API — auto-reinitializes the dashboard on every client-side route transition.</li>
+        </ul>
+        <div class="proj-links">
+          <a href="https://github.com/STONE-ROHIT/cf-enhancer" target="_blank" rel="noopener noreferrer">→ Source</a>
+          <span class="unpublished-note">Not yet published to Chrome Web Store</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="stats">
+    <div class="container">
+      <h2 class="section-title"><span class="slash">// </span>stats.log</h2>
+
+      <table class="stats-table">
+        <thead>
+          <tr><th>Platform</th><th>Solved</th><th>Rating</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="platform-name">LeetCode</td>
+            <td>571</td>
+            <td class="rating-val">1520</td>
+            <td class="stats-note">Top 4.5% — Weekly Contest 508 (Rank 1,717 / 37,970)</td>
+          </tr>
+          <tr>
+            <td class="platform-name">Codeforces</td>
+            <td>238</td>
+            <td class="rating-val">1186</td>
+            <td class="stats-note">—</td>
+          </tr>
+          <tr>
+            <td class="platform-name">CodeChef</td>
+            <td>438</td>
+            <td class="rating-val">1401 (2★)</td>
+            <td class="stats-note">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="aggregate-callout"><strong>1,200+</strong> DSA problems solved across three platforms — strongest in Dynamic Programming, Graphs, Trees, and Binary Search.</p>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title"><span class="slash">// </span>skills.yaml</h2>
+
+      <div class="skill-group">
+        <p class="skill-group-label">languages</p>
+        <div class="skill-tags">
+          <span class="skill-tag">C++</span><span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">SQL</span><span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">frameworks &amp; libraries</p>
+        <div class="skill-tags">
+          <span class="skill-tag">React 18</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span>
+          <span class="skill-tag">Drizzle ORM</span><span class="skill-tag">Tailwind CSS</span><span class="skill-tag">Chart.js</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">databases</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Neon Serverless PostgreSQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">developer tools</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span><span class="skill-tag">GitHub</span><span class="skill-tag">Linux</span>
+          <span class="skill-tag">Vite</span><span class="skill-tag">Vercel</span><span class="skill-tag">Render</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">concepts</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Data Structures &amp; Algorithms</span><span class="skill-tag">OOP</span>
+          <span class="skill-tag">RESTful API Design</span><span class="skill-tag">JWT Authentication</span>
+          <span class="skill-tag">RBAC</span><span class="skill-tag">Webhook Integration</span>
+          <span class="skill-tag">GraphQL API</span><span class="skill-tag">LLM API Integration</span>
+          <span class="skill-tag">Chrome Extension (MV3)</span><span class="skill-tag">Monorepo Architecture</span>
+          <span class="skill-tag">Rate Limiting</span><span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title"><span class="slash">// </span>contact.sh</h2>
+      <div class="contact-list">
+        <a class="contact-row" href="mailto:rohitkashyap30209@gmail.com"><span class="term-prompt">$ </span>mail rohitkashyap30209@gmail.com</a>
+        <a class="contact-row" href="https://linkedin.com/in/rohit-kumar-iiitj" target="_blank" rel="noopener noreferrer"><span class="term-prompt">$ </span>open linkedin.com/in/rohit-kumar-iiitj</a>
+        <a class="contact-row" href="https://github.com/STONE-ROHIT" target="_blank" rel="noopener noreferrer"><span class="term-prompt">$ </span>open github.com/STONE-ROHIT</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Built with HTML, CSS &amp; JS — no framework, no build step.</p>
+</footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero = document.getElementById('hero');
+  var skip = false;
+  if (hero) hero.addEventListener('click', function () { skip = true; });
+
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  async function typeCaptions() {
+    if (reduceMotion) return;
+    var captions = document.querySelectorAll('.caption-text');
+    for (var i = 0; i < captions.length; i++) {
+      var el = captions[i];
+      var full = el.textContent;
+      el.textContent = '';
+      for (var c = 0; c < full.length; c++) {
+        if (skip) { el.textContent = full; break; }
+        el.textContent += full[c];
+        await sleep(16);
+      }
+      await sleep(180);
+    }
+  }
+  typeCaptions();
+
+  // Scroll reveal
+  var sections = document.querySelectorAll('.section');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    sections.forEach(function (s) { io.observe(s); });
+  } else {
+    sections.forEach(function (s) { s.classList.add('is-visible'); });
+  }
+
+  // Visitor counter — Abacus (abacus.jasoncameron.dev), a maintained CountAPI successor.
+  // Every page load increments the count by 1, as requested. Fails silently (hides the
+  // line) rather than showing a broken or frozen number if the service is unreachable.
+  (async function () {
+    var valEl = document.getElementById('visit-val');
+    var lineEl = document.getElementById('visit-line');
+    if (!valEl) return;
+    try {
+      var res = await fetch('https://abacus.jasoncameron.dev/hit/stonerohit-dev-portfolio/visits', { cache: 'no-store' });
+      if (!res.ok) throw new Error('status ' + res.status);
+      var data = await res.json();
+      var n = Number(data.value);
+      if (!Number.isFinite(n)) throw new Error('bad value');
+      valEl.textContent = String(n).padStart(6, '0');
+    } catch (err) {
+      console.warn('Visitor counter unavailable:', err);
+      if (lineEl) lineEl.style.display = 'none';
+    }
+  })();
+})();
+</script>
+
+</body>
+</html>
